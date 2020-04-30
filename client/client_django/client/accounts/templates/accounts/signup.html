@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+    <h1 class="page-title">Signup</h1>
+
+    {# Display a form #}
+
+    <form class="myform form-signup" action="{% url 'accounts:signup' %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form layout='inline' %}
+        {% buttons %}
+            <button type="submit" class="btn btn-warning">Submit</button>
+        {% endbuttons %}
+    </form>
+</div>
+{% endblock %}

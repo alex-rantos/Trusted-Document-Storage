@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<div class="h-100 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+
+    <h1 class="page-title">Log in</h1>
+    
+    {% if login_message %}
+    <h3 class="page-title" style="color: red;">{{ login_message }}</h3>
+    {% endif %}
+
+    <form class="myform site-form" action="{% url 'accounts:main' %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form layout='inline' %}
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% endif %}
+        {% buttons %}
+            <button type="submit" class="btn btn-info">Login</button>
+        {% endbuttons %}
+    </form>
+</div>
+
+{% endblock %}

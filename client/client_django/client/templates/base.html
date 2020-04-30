@@ -1,0 +1,55 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html style = "height: 100%;">
+    <head>
+        <meta charset="utf-8">
+        <title>Inline Protocol</title>
+
+        {# Load the tag library #}
+        {% load bootstrap4 %}
+
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+
+<!--        <link rel="stylesheet" type="text/css" href="{%static 'css/css.css' %}" />-->
+<!--<script type="text/javascript" src="{%static 'js/jquery.min.js' %}"></script>-->
+<!--<link rel="stylesheet" href="{%static 'bootstrap-3.3.5-dist/css/bootstrap.min.css' %}" >-->
+<!--<script src="{%static 'bootstrap-3.3.5-dist/js/jquery-2.2.4.min.js' %}"></script>-->
+<!--<script src="{%static 'bootstrap-3.3.5-dist/js/bootstrap.min.js' %}"></script>-->
+
+    </head>
+    <body class="h-100 d-flex flex-column">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+            {% if user.is_authenticated %}            
+                <a  class="btn btn-outline-info mr-2">{{ user.username }}</a>
+
+                <form class="logout-link" action="{% url 'accounts:logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a class="btn btn-outline-info mr-2" href="{% url 'accounts:login' %}">Login</a>
+                <a class="btn btn-outline-warning ml-2" href="{% url 'accounts:signup' %}">Signup</a>
+            {% endif %}
+        </div>
+        <div class="h-100" id="page-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container text-center">
+          <small>Copyright &copy;20</small>
+        </div>
+    </footer>
+    
+    </body>
+</html>

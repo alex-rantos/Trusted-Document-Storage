@@ -1,0 +1,5 @@
+Report/*.aux
+Report/*.tex
+Report/*.gz
+Report/*.out
+**/venv/**
