@@ -11,3 +11,8 @@ A brief description for the selected AWS that were used:
 3. Key Management Service (KMS): for signing and verifying documents.
 4. Simple Storage Service (S3): for documents storage.
 5. Elastic Compute Cloud  (EC2): for an online website.
+
+### Lessons learnt
+
+1. Postgres is not suitable for storing cryptographic hash values since it does not allow saving null bytes. For this reason, mySQL was used to avoid values conversion.
+2. Serializing bytearrays was a task itself since many different conversions were resulting into invalid verification while sending converted bytearrays via JSON. Converting to hex values and back was the solution.
